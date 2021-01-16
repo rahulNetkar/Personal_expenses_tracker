@@ -23,12 +23,14 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Personal Expenses'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            UserTransactions(),
-          ],
-        ),
+      body: ListView(
+        children: [
+          Column(
+            children: [
+              UserTransactions(),
+            ],
+          ),
+        ],
       ),
     );
   }
