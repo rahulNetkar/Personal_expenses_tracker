@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
 import 'package:intl/intl.dart';
-import './user_transaction.dart';
 
 class TransactionList extends StatelessWidget {
   List<Transaction> _userTransactions = [];
@@ -10,8 +9,8 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: _userTransactions.map((tx) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
         return Card(
           elevation: 7,
           child: Row(
@@ -29,20 +28,20 @@ class TransactionList extends StatelessWidget {
                 ),
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  '\$${tx.amount}',
+                  '\$${_userTransactions[index].amount}',
                 ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(tx.title,
+                  Text(_userTransactions[index].title,
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       )),
                   Text(
-                    DateFormat.yMMMMd().format(tx.date),
+                    DateFormat.yMMMMd().format(_userTransactions[index].date),
                     style: TextStyle(
                       color: Colors.black54,
                     ),
@@ -52,7 +51,8 @@ class TransactionList extends StatelessWidget {
             ],
           ),
         );
-      }).toList(),
+      },
+      itemCount: _userTransactions.length,
     );
   }
 }
